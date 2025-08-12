@@ -10,9 +10,17 @@ class DomainTable extends DataTableComponent
 {
     protected $model = Domain::class;
 
+
+    protected $listeners = ['re_render_table' => '$refresh'];
+
+
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id');
+        $this->setDefaultSort('id', 'desc');
+        $this->setEagerLoadAllRelationsEnabled();
     }
 
     public function columns(): array
@@ -21,8 +29,10 @@ class DomainTable extends DataTableComponent
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Name", "name")
+                ->searchable()
                 ->sortable(),
             Column::make("TTL", "ttl")
+                ->searchable()
                 ->sortable(),
             Column::make("SOA Serial", "soa_serial")
                 ->sortable(),
@@ -33,11 +43,19 @@ class DomainTable extends DataTableComponent
             Column::make("SOA Ex", "soa_expire")
                 ->sortable(),
             Column::make("SOA Min", "soa_minimum")
+                ->searchable()
                 ->sortable(),
             Column::make("SOA NS", "soa_ns")
+                ->searchable()
                 ->sortable(),
             Column::make("SOA Email", "soa_email")
+                ->searchable()
                 ->sortable(),
+            Column::make("Aksi", "id")
+                ->format(
+                    fn($value, $row, Column $column) => view('components.table.custom.action')->withRow($row),
+                ),
+
         ];
     }
 }

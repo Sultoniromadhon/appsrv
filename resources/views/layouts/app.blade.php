@@ -16,6 +16,7 @@
     <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}?1692870487" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-flags.min.css') }}?1692870487" rel="stylesheet" />
@@ -48,7 +49,7 @@
         <div class="page-wrapper">\
 
             <!-- Header -->
-            @include('layouts.partials.header')
+            {{-- @include('layouts.partials.header') --}}
 
             <!-- Body -->
             <div class="page-body">
@@ -76,27 +77,30 @@
 
     <script>
         document.addEventListener('livewire:navigated', () => {
-          console.log('Navigated. Navbar tetap tidak reload.');
+            console.log('Navigated. Navbar tetap tidak reload.');
+
+
         });
     </script>
 
 
     @livewireScripts
-    <livewire:components.modal.std />
-    @stack('script')
     <script>
         window.addEventListener('modal-hide', event => {
             $('#' + event.detail.modal).modal('hide');
+            console.log('Received modal-show event:', event.detail);
+            const modalId = event.detail[0].modal;
+            $('#' + modalId).modal('hide');
+
+
         })
+
+
         window.addEventListener('modal-show', event => {
             $('#' + event.detail.modal).modal('show');
-
-            // tinymce.init({
-            //     selector: '#description',
-            //     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-            //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            // });
-
+            console.log('Received modal-show event:', event.detail);
+            const modalId = event.detail[0].modal;
+            $('#' + modalId).modal('show');
         })
         @if (session()->has('success'))
             Swal.fire({
@@ -116,6 +120,10 @@
             })
         @endif
     </script>
+
+    <livewire:components.modal.std />
+    @stack('script')
+
 </body>
 
 </html>

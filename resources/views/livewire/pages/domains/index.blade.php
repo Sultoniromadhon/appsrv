@@ -1,16 +1,9 @@
-{{-- <div>
-    <button class="btn btn-primary" wire:click="showModal">Add DNS</button>
-
-    <livewire:pages.domains.domain-table />
-
-
-</div> --}}
 <div>
-    <div class="page-heading">
-        <div class="page-title">
+    <div class="container">
+        <div class="title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Domain</h3>
+                    <h3>Page</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -29,11 +22,18 @@
                     <x-layout.card>
                         <x-slot:header>
                             <div class="d-flex justify-content-between">
-                                <h5 class="card-title">List Domain</h5>
-                                <div class="card-toolbar">
+
+                                <div class="card-subtitle">
                                     <button type="button" wire:click="openModal" class="btn btn-primary me-2">
                                         Tambah
                                     </button>
+
+                                    {{-- <button type="button"
+                                        wire:click="$dispatch('modal-show', { modal: '{{$modal}}' })"
+                                        class="btn btn-primary me-2">
+                                        Tambah
+                                    </button> --}}
+
                                 </div>
                             </div>
                         </x-slot:header>
@@ -46,7 +46,19 @@
         </section>
     </div>
 
+
+
     <x-modal.centered _id="{{ $modal }}" title="{{ $is_edit ? 'Edit' : 'Tambah' }} Domain" form="submit">
+
+
+
+
+        {{-- {{dd($open)}} --}}
+        {{-- <x-modal.centered _id="{{$modal}}" title="{{ $is_edit ? 'Edit' : 'Tambah' }} Domain" form="submit"
+        x-data="{ show: false }" x-on:modal-show.window="if ($event.detail.modal === '{{$modal}}') show = true"
+        x-show="show" x-cloak> --}}
+
+
         <x-slot:content>
             <x-alert.validation />
             <x-alert.notification />
@@ -55,10 +67,39 @@
                     <label for="code">Nama Domain</label>
                     <x-form.text name="Nama" model="name" />
                 </div>
+                 <div class="form-group">
+                    <label for="ttl">TTL Domain</label>
+                    <x-form.text name="ttl" model="ttl" />
+                </div>
+                 <div class="form-group">
+                    <label for="soa_serial">SOA Serial</label>
+                    <x-form.text name="soa_serial" model="soa_serial" />
+                </div>
+                 <div class="form-group">
+                    <label for="code">SOA Refresh</label>
+                    <x-form.text name="SOA Refresh" model="soa_refresh" />
+                </div>
+                 <div class="form-group">
+                    <label for="code">SOA Exp</label>
+                    <x-form.text name="SOA Exp" model="soa_expire" />
+                </div>
+                <div class="form-group">
+                    <label for="code">SOA Min</label>
+                    <x-form.text name="SOA Min" model="soa_min" />
+                </div>
+                <div class="form-group">
+                    <label for="code">SOA NS</label>
+                    <x-form.text name="SOA NS" model="soa_ns" />
+                </div>
+                <div class="form-group">
+                    <label for="code">SOA Email</label>
+                    <x-form.text name="SOA Email" model="soa_email" />
+                </div>
             </div>
         </x-slot:content>
         <x-slot:action>
             <button type="button" class="btn btn-secondary me-2" wire:click="closeModal">Batal</button>
+            {{-- <button type="button" class="btn btn-secondary me-2"  wire:click="$dispatch('modal-hide', { modal: 'domainModal' })">Batal</button> --}}
             <x-button.submit label="Simpan" target="submit" class="btn-primary ml-1" />
         </x-slot:action>
     </x-modal.centered>

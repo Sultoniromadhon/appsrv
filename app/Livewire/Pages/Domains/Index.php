@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Domains;
 
 use App\Models\Domain;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Index extends Component
 {
@@ -17,10 +18,15 @@ class Index extends Component
 
     public $_id;
 
-    protected $listeners = [
-        'edit',
-        'delete'
-    ];
+    // protected $listeners = [
+    //     'edit',
+    //     'delete'
+    // ];
+
+    protected $listeners = ['delete' => 'delete'];
+
+
+
 
     public function reset_form()
     {
@@ -32,7 +38,9 @@ class Index extends Component
     {
         $this->resetErrorBag();
         $this->reset_form();
-        $this->dispatchBrowserEvent('modal-hide', ['modal' => $this->modal]);
+        // $this->dispatchBrowserEvent('modal-hide', ['modal' => $this->modal]);
+        $this->dispatch('modal-hide', ['modal' => $this->modal]);
+        $this->dispatch('focus-outside-modal');
     }
 
     public function openModal()
@@ -40,29 +48,14 @@ class Index extends Component
         $this->resetErrorBag();
         $this->reset_form();
         $this->dispatch('modal-show', ['modal' => $this->modal]);
-
-
+        $this->dispatch('focus-outside-modal');
     }
-
-    // public function showModal()
-    // {
-    //     $this->resetErrorBag();
-    //     $this->reset_form();
-
-    //     // $body = view('components.modal.content')->with(['text' => 'Konten default modal.'])->render();
-    //     $footer = view('components.modal.footer-close')->render();
-
-    //     $body = "content";
-    //     // $footer = "footer";
-
-    //     $this->dispatch('openModal', title: 'Judul Modal : Test ', body: $body, footer: $footer);
-    // }
 
 
     public function submit()
     {
         $this->resetErrorBag();
-        $this->validate();
+        // $this->validate();
 
         if ($this->is_edit) {
             $data = Domain::where('id', $this->_id)->update([
@@ -72,10 +65,12 @@ class Index extends Component
             $data = Domain::create([
                 'name' => $this->name
             ]);
+
+
         }
 
         if ($data) {
-            $this->emit('re_render_table');
+            $this->dispatch('re_render_table');
             $this->closeModal();
             session()->flash('success', 'Successfully saved Domain');
         } else {
@@ -93,17 +88,24 @@ class Index extends Component
         $this->_id = $domain['id'];
         $this->name = $domain['name'];
 
-        $this->dispatchBrowserEvent('modal-show', ['modal' => $this->modal]);
+        // $this->dispatchBrowserEvent('modal-show', ['modal' => $this->modal]);
+        $this->dispatch('modal-show', ['modal' => $this->modal]);
+
     }
 
-    public function delete($data)
+
+
+    #[On('delete')]
+
+    public function delete($row)
     {
+
         $this->resetErrorBag();
 
-        $data = Domain::where('id', $data['id'])->delete();
+        $a = Domain::where('id', $a['id'])->delete();
 
-        if ($data) {
-            $this->emit('re_render_table');
+        if ($a) {
+            $this->dispatch('re_render_table');
             $this->closeModal();
             session()->flash('success', 'Successfully saved Domain');
         } else {
