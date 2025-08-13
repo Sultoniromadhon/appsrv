@@ -11,9 +11,18 @@
             <div class="modal-header" id="{{ $_id }}_header">
                 <h5 class="modal-title" id="{{ $_id }}Title">{{ $title }}
                 </h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <i data-feather="x"></i>
+
+
+                <button type="button" class="btn btn-light rounded-circle p-2 border-0 close"
+                    style="width: 32px; height: 32px;" data-bs-dismiss="modal" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        viewBox="0 0 16 16">
+                        <line x1="4" y1="4" x2="12" y2="12" />
+                        <line x1="12" y1="4" x2="4" y2="12" />
+                    </svg>
                 </button>
+
             </div>
             @if ($form)
                 <form wire:submit.prevent="{{ $form }}">

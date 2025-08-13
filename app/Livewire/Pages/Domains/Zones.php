@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Pages\Domains;
 
-use App\Models\Domain;
 use Livewire\Component;
-use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Session;
 
-class Index extends Component
+class Zones extends Component
 {
+    public function render()
+    {
+        return view('livewire.pages.domains.zones')->layout('layouts.app')->layoutData(['title' => 'Zones   ']);
+    }
 
 
     public $modal = 'domain_modal';
@@ -24,6 +27,16 @@ class Index extends Component
         'control'
     ];
 
+
+    public $id;
+
+    public function mount($id = null)
+    {
+        if ($id) {
+            Session::put('id_ses', $id);
+        }
+        $this->id = Session::get('id_ses');
+    }
 
     public function reset_form()
     {
@@ -104,21 +117,5 @@ class Index extends Component
         } else {
             session()->flash('error', 'Failed to saved Domain');
         }
-    }
-
-
-    // public function control($id){
-
-    //     return redirect()->route('pages.domains.zones', ['id' => $id] );
-    // }
-    public function control($id)
-{
-    return $this->redirectRoute('pages.domains.zones', ['id' => $id], navigate: true);
-}
-
-
-    public function render()
-    {
-        return view('livewire.pages.domains.index')->layout('layouts.app')->layoutData(['title' => 'Domains']);
     }
 }

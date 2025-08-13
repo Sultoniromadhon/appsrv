@@ -9,7 +9,7 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Domain</li>
+                            <li class="breadcrumb-item active" aria-current="page">DNS Zone</li>
                         </ol>
                     </nav>
                 </div>
@@ -38,7 +38,7 @@
                             </div>
                         </x-slot:header>
                         <x-slot:body>
-                            <livewire:pages.domains.domain-table />
+                            <livewire:pages.domains.zone-table />
                         </x-slot:body>
                     </x-layout.card>
                 </div>
@@ -71,30 +71,7 @@
                     <label for="ttl">TTL Domain</label>
                     <x-form.text name="ttl" model="ttl" />
                 </div>
-                 <div class="form-group">
-                    <label for="soa_serial">SOA Serial</label>
-                    <x-form.text name="soa_serial" model="soa_serial" />
-                </div>
-                 <div class="form-group">
-                    <label for="code">SOA Refresh</label>
-                    <x-form.text name="SOA Refresh" model="soa_refresh" />
-                </div>
-                 <div class="form-group">
-                    <label for="code">SOA Exp</label>
-                    <x-form.text name="SOA Exp" model="soa_expire" />
-                </div>
-                <div class="form-group">
-                    <label for="code">SOA Min</label>
-                    <x-form.text name="SOA Min" model="soa_min" />
-                </div>
-                <div class="form-group">
-                    <label for="code">SOA NS</label>
-                    <x-form.text name="SOA NS" model="soa_ns" />
-                </div>
-                <div class="form-group">
-                    <label for="code">SOA Email</label>
-                    <x-form.text name="SOA Email" model="soa_email" />
-                </div>
+
             </div>
         </x-slot:content>
         <x-slot:action>
