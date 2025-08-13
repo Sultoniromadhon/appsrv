@@ -39,7 +39,7 @@ class Index extends Component
     {
         $this->resetErrorBag();
         $this->reset_form();
-        $this->dispatch('modal-show', ['modal' => $this->modal]);
+        $this->dispatch('modal-show', modal: $this->modal);
 
 
     }
