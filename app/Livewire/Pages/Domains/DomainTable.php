@@ -38,15 +38,15 @@ class DomainTable extends DataTableComponent
                 ->sortable(),
             Column::make("SOA Serial", "soa_serial")
                 ->sortable(),
-            Column::make("SOA Refresh", "soa_refresh")
-                ->sortable(),
-            Column::make("SOA Retry", "soa_retry")
-                ->sortable(),
-            Column::make("SOA Ex", "soa_expire")
-                ->sortable(),
-            Column::make("SOA Min", "soa_minimum")
-                ->searchable()
-                ->sortable(),
+            // Column::make("SOA Refresh", "soa_refresh")
+            //     ->sortable(),
+            // Column::make("SOA Retry", "soa_retry")
+            //     ->sortable(),
+            // Column::make("SOA Ex", "soa_expire")
+            //     ->sortable(),
+            // Column::make("SOA Min", "soa_minimum")
+            //     ->searchable()
+            //     ->sortable(),
             Column::make("SOA NS", "soa_ns")
                 ->searchable()
                 ->sortable(),

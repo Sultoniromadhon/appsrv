@@ -25,7 +25,7 @@
 
                                 <div class="card-subtitle">
                                     <button type="button" wire:click="openModal" class="btn btn-primary me-2">
-                                        Tambah
+                                        글쓰기
                                     </button>
 
                                     {{-- <button type="button"
@@ -48,7 +48,7 @@
 
 
 
-    <x-modal.centered _id="{{ $modal }}" title="{{ $is_edit ? 'Edit' : 'Tambah' }} Domain" form="submit">
+    <x-modal.centered _id="{{ $modal }}" title="{{ $is_edit ? '@' : '#' }} 서브도메인" form="submit">
 
 
 
@@ -64,20 +64,30 @@
             <x-alert.notification />
             <div class="row">
                 <div class="form-group">
-                    <label for="code">Nama Domain</label>
-                    <x-form.text name="Nama" model="name" />
+                    <label for="code">서브도메인 이름</label>
+                    <x-form.text name="이름" model="name" />
                 </div>
-                 <div class="form-group">
-                    <label for="ttl">TTL Domain</label>
-                    <x-form.text name="ttl" model="ttl" />
+
+                <div class="form-group">
+                    <label for="code">TTL</label>
+                    <x-form.text name="TTL" model="ttl" />
+                </div>
+                <div class="form-group">
+                    <label for="type">타입</label>
+                    <x-form.text name="A CNAME NS etc" model="type" />
+                </div>
+
+                <div class="form-group">
+                    <label for="value">값</label>
+                    <x-form.text name="IP @ ns1." model="value" />
                 </div>
 
             </div>
         </x-slot:content>
         <x-slot:action>
-            <button type="button" class="btn btn-secondary me-2" wire:click="closeModal">Batal</button>
+            <button type="button" class="btn btn-secondary me-2" wire:click="closeModal">취소</button>
             {{-- <button type="button" class="btn btn-secondary me-2"  wire:click="$dispatch('modal-hide', { modal: 'domainModal' })">Batal</button> --}}
-            <x-button.submit label="Simpan" target="submit" class="btn-primary ml-1" />
+            <x-button.submit label="저장" target="submit" class="btn-primary ml-1" />
         </x-slot:action>
     </x-modal.centered>
 </div>

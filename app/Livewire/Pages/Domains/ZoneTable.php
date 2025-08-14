@@ -12,21 +12,27 @@ class ZoneTable extends DataTableComponent
 {
     public function builder(): Builder
     {
+        // return DnsRecord::query()
+        // ->join('domains', 'dns_records.domain_id', '=', 'domains.id') // Join dns_records with domains
+        // ->where('domains.id', '=', Session::get('id_ses'))
+        // ->select(
+        //     'dns_records.*',  // Select all fields from dns_records
+        //     'domains.name as domain_name', // Select domain's name column as domain_name
+        //     'domains.soa_serial', // Include other domain info
+        //     'domains.soa_refresh',
+        //     'domains.soa_retry',
+        //     'domains.soa_expire',
+        //     'domains.soa_minimum',
+        //     'domains.soa_ns',
+        //     'domains.soa_email'
+        // );
+
         return DnsRecord::query()
-        ->join('domains', 'dns_records.domain_id', '=', 'domains.id') // Join dns_records with domains
-        ->where('domains.id', '=', Session::get('id_ses'))
-        ->select(
-            'dns_records.*',  // Select all fields from dns_records
-            'domains.name as domain_name', // Select domain's name column as domain_name
-            'domains.soa_serial', // Include other domain info
-            'domains.soa_refresh',
-            'domains.soa_retry',
-            'domains.soa_expire',
-            'domains.soa_minimum',
-            'domains.soa_ns',
-            'domains.soa_email'
-        );
-        }
+            ->with('domain') // agar kolom domain tersedia
+            ->whereHas('domain', function ($query) {
+                $query->where('id', Session::get('id_ses'));
+            });
+    }
 
     protected $listeners = ['re_render_table' => '$refresh'];
 
@@ -47,15 +53,19 @@ class ZoneTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-                // Column::make("Domain", "domains.name")
-                // ->searchable()
-                // ->sortable(),
-
+            Column::make("Domain", "domain.name")
+                ->searchable()
+                ->sortable(),
             Column::make("Name", "name")
                 ->searchable()
                 ->sortable(),
-
             Column::make("TTL", "ttl")
+                ->searchable()
+                ->sortable(),
+            Column::make("Type", "ttl")
+                ->searchable()
+                ->sortable(),
+            Column::make("Value", "value")
                 ->searchable()
                 ->sortable(),
             Column::make("Aksi", "id")

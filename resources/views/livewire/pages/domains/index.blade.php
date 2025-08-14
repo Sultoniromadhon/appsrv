@@ -21,19 +21,17 @@
                     <x-alert.notification />
                     <x-layout.card>
                         <x-slot:header>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                {{-- Konten kiri (optional) --}}
+                                <div>
+                                    <h5 class="card-title m-0">SOA Record</h5>
+                                </div>
 
-                                <div class="card-subtitle">
-                                    <button type="button" wire:click="openModal" class="btn btn-primary me-2">
-                                        Tambah
+                                {{-- Tombol kanan --}}
+                                <div>
+                                    <button type="button" wire:click="openModal" class="btn btn-primary">
+                                        글쓰기
                                     </button>
-
-                                    {{-- <button type="button"
-                                        wire:click="$dispatch('modal-show', { modal: '{{$modal}}' })"
-                                        class="btn btn-primary me-2">
-                                        Tambah
-                                    </button> --}}
-
                                 </div>
                             </div>
                         </x-slot:header>
@@ -85,7 +83,7 @@
                 </div>
                 <div class="form-group">
                     <label for="code">SOA Min</label>
-                    <x-form.text name="SOA Min" model="soa_min" />
+                    <x-form.text name="SOA Min" model="soa_minimum" />
                 </div>
                 <div class="form-group">
                     <label for="code">SOA NS</label>

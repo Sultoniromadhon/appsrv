@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
     <button class="btn btn-secondary btn-sm me-2" wire:click="$dispatch('control', {{ json_encode($row) }})">
-        Control Domain
+        Zones
     </button>
     <button class="btn btn-light-primary btn-sm me-2" wire:click="$dispatch('edit', {{ json_encode($row) }})">
         Edit

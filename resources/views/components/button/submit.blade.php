@@ -4,7 +4,7 @@
     {{ $label }}
 </div>
 <div wire:loading wire:target="{{ $target }}">
-    Tunggu Sebentar...
+    Wait a minute...
     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
 </div>
 </button>
